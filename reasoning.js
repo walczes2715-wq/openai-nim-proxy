@@ -263,9 +263,11 @@ function getReasoningPayload(model, enableThinking, clientReasoningEffort, hasTo
       return { chat_template_kwargs: { thinking_mode: thinkingMode } };
     }
 
-   case 'moonshotai/kimi-k3': {
-  return {};
-}
+    case 'moonshotai/kimi-k3': {
+      // No off-switch — omitting the field falls back to Kimi's own 'max'.
+      if (effort) return { reasoning_effort: effort };
+      return { reasoning_effort: enableThinking ? 'high' : 'low' };
+    }
 
     default:
       return {};
