@@ -454,7 +454,7 @@ app.post('/v1/chat/completions', async (req, res) => {
       ...forwardedFields,
       temperature: temperature ?? 0.7,
       max_tokens: Math.min(max_tokens ?? 2048, MAX_TOKENS_LIMIT),
-      stream: stream || false
+      stream: false
     };
 
     const { response, model: usedModel } = await callWithFallback(
